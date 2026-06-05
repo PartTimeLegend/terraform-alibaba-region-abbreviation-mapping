@@ -19,6 +19,7 @@ variable "alibaba_region_abbr_map" {
     "cn-zhongwei"     = "cnzw"
     "cn-hongkong"     = "cnhk"
     "ap-southeast-1"  = "apse1"
+    "ap-southeast-2"  = "apse2"
     "ap-southeast-3"  = "apse3"
     "ap-southeast-5"  = "apse5"
     "ap-southeast-6"  = "apse6"
