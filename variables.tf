@@ -21,12 +21,14 @@ variable "alibaba_region_abbr_map" {
     "ap-southeast-1"  = "apse1"
     "ap-southeast-2"  = "apse2"
     "ap-southeast-3"  = "apse3"
+    "ap-southeast-4"  = "apse4"
     "ap-southeast-5"  = "apse5"
     "ap-southeast-6"  = "apse6"
     "ap-southeast-7"  = "apse7"
     "ap-southeast-8"  = "apse8"
     "ap-northeast-1"  = "apne1"
     "ap-northeast-2"  = "apne2"
+    "ap-south-1"      = "aps1"
     "us-west-1"       = "usw1"
     "us-east-1"       = "use1"
     "eu-central-1"    = "euc1"
@@ -35,6 +37,7 @@ variable "alibaba_region_abbr_map" {
     "me-east-1"       = "mee1"
     "me-central-1"    = "mec1"
     "na-south-1"      = "nas1"
+    "na-mexico-1"     = "namex1"
   }
 }
 
