@@ -31,6 +31,7 @@ variable "alibaba_region_abbr_map" {
     "ap-south-1"      = "aps1"
     "us-west-1"       = "usw1"
     "us-east-1"       = "use1"
+    "us-southeast-1"  = "usse1"
     "eu-central-1"    = "euc1"
     "eu-west-1"       = "euw1"
     "eu-west-2"       = "euw2"
@@ -38,6 +39,7 @@ variable "alibaba_region_abbr_map" {
     "me-central-1"    = "mec1"
     "na-south-1"      = "nas1"
     "na-mexico-1"     = "namex1"
+    "rus-west-1"      = "rusw1"
   }
 }
 
