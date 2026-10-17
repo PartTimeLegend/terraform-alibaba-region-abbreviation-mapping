@@ -46,13 +46,24 @@ variable "alibaba_region_abbr_map" {
 }
 
 locals {
+  # AliCloud regions may be published with preview/dod/gov suffix qualifiers.
+  # Keep those suffix variants mapped to the same abbreviation as the base region so
+  # future agent updates do not miss these special-case region forms.
   alibaba_region_abbr_map_normalized = {
     for region_name, abbreviation in var.alibaba_region_abbr_map :
     lower(replace(region_name, "-", "")) => abbreviation
   }
 
+  alibaba_region_abbr_map_suffix_variants = merge([
+    for region_name, abbreviation in var.alibaba_region_abbr_map : {
+      for suffix in ["preview", "dod", "gov"] :
+      lower(replace("${region_name}-${suffix}", "-", "")) => abbreviation
+    }
+  ]...)
+
   alibaba_region_abbr_lookup_map = merge(
     var.alibaba_region_abbr_map,
     local.alibaba_region_abbr_map_normalized,
+    local.alibaba_region_abbr_map_suffix_variants,
   )
 }
