@@ -26,6 +26,8 @@ variable "alibaba_region_abbr_map" {
     "ap-southeast-6"  = "apse6"
     "ap-southeast-7"  = "apse7"
     "ap-southeast-8"  = "apse8"
+    "ap-southeast-9"  = "apse9"
+    "ap-southeast-10" = "apse10"
     "ap-northeast-1"  = "apne1"
     "ap-northeast-2"  = "apne2"
     "ap-south-1"      = "aps1"
@@ -35,20 +37,33 @@ variable "alibaba_region_abbr_map" {
     "eu-west-1"       = "euw1"
     "eu-west-2"       = "euw2"
     "me-east-1"       = "mee1"
+    "me-east-2"       = "mee2"
     "me-central-1"    = "mec1"
+    "me-central-2"    = "mec2"
     "na-south-1"      = "nas1"
     "na-mexico-1"     = "namex1"
   }
 }
 
 locals {
+  # AliCloud regions may be published with preview/dod/gov suffix qualifiers.
+  # Keep those suffix variants mapped to the same abbreviation as the base region so
+  # future agent updates do not miss these special-case region forms.
   alibaba_region_abbr_map_normalized = {
     for region_name, abbreviation in var.alibaba_region_abbr_map :
     lower(replace(region_name, "-", "")) => abbreviation
   }
 
+  alibaba_region_abbr_map_suffix_variants = merge([
+    for region_name, abbreviation in var.alibaba_region_abbr_map : {
+      for suffix in ["preview", "dod", "gov"] :
+      lower(replace("${region_name}-${suffix}", "-", "")) => abbreviation
+    }
+  ]...)
+
   alibaba_region_abbr_lookup_map = merge(
     var.alibaba_region_abbr_map,
     local.alibaba_region_abbr_map_normalized,
+    local.alibaba_region_abbr_map_suffix_variants,
   )
 }

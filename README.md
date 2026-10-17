@@ -8,6 +8,7 @@ A simple module that provides mappings between Alibaba Cloud region IDs and stan
 
 - Mapping of Alibaba Cloud region IDs to short abbreviations
 - Supports both canonical region IDs and normalized lowercase names without hyphens
+- Includes preview/dod/gov suffix-qualified aliases alongside canonical IDs for compatibility
 - Helper output map to simplify regional naming across Alibaba Cloud resources
 - Zero external dependencies
 
@@ -62,6 +63,10 @@ locals {
   resource_name = "${module.region_abbreviation_mapping.lookup_region_abbreviation["cn-hangzhou"]}-app"
 }
 ```
+
+### Special preview/dod/gov region qualifiers
+
+The lookup map intentionally also accepts suffix-qualified aliases such as `cn-beijing-preview`, `cn-beijing-dod`, and `cn-beijing-gov` by normalizing them to the same abbreviation as the base region. Future agents should keep these suffix variants in scope whenever adding new AliCloud regions.
 
 ## Available Outputs
 
